@@ -2,7 +2,7 @@ name: Backend CI/CD
 on:
   push:
     branches:
-      - master
+      - 'developer/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,11 +17,3 @@ jobs:
     
     - name: Build
       run: mvn clean package spring-boot:repackage
-
-    - name: Publish version
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: uladzimirbaklan/lecturer-private-cabinet-backend:latest
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        snapshot: true
