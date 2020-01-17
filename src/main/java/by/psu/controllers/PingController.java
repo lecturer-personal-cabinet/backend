@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PingController {
 
-    @GetMapping(path = "/ping")
+    @GetMapping(path = "/health")
     public String ping() {
         return "success";
     }
