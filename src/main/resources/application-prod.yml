@@ -1,0 +1,11 @@
+spring:
+  flyway:
+    url: jdbc:postgresql://lpc.cuum3wgpzd5l.us-east-1.rds.amazonaws.com:5427/lpc
+    user: postgres
+    password: postgres
+    schemas:
+      - public
+  datasource:
+    url: jdbc:postgresql://lpc.cuum3wgpzd5l.us-east-1.rds.amazonaws.com:5427/lpc
+    username: postgres
+    password: postgres
