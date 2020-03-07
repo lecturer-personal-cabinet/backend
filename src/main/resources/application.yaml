@@ -1,0 +1,20 @@
+spring:
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://lpc.cuum3wgpzd5l.us-east-1.rds.amazonaws.com:5427/lpc
+    user: postgres
+    password: postgres
+    baselineOnMigrate: true
+    schemas:
+      - public
+  datasource:
+    url: jdbc:postgresql://lpc.cuum3wgpzd5l.us-east-1.rds.amazonaws.com:5427/lpc
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
