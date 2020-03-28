@@ -41,4 +41,7 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "owner")
     private Set<ClassroomCodeEntity> classroomCodes;
+
+    @OneToMany(mappedBy = "sender")
+    private Set<UserTimelinePostEntity> userTimelinePosts;
 }

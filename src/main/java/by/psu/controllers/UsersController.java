@@ -26,7 +26,7 @@ public class UsersController {
         return usersService.getAllUsers();
     }
 
-    @GetMapping(path = "/groups/users/{groupId}")
+    @GetMapping(path = "/groups/{groupId}/users")
     public List<User> getAllUsersRelatedToGroup(@PathVariable("groupId") String groupId) {
         return usersService.getAllUsersRelatedToGroup(groupId);
     }
@@ -43,7 +43,7 @@ public class UsersController {
         return usersService.getAllGroups();
     }
 
-    @GetMapping(path = "/users/groups/{userId}")
+    @GetMapping(path = "/users/{userId}/groups")
     public Group getGroupRelatedToUser(@PathVariable("userId") String userId) {
         return usersService
                 .getGroupRelatedToUser(userId)
