@@ -22,6 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final SecurityMapper securityMapper;
     private final UsersService usersService;
     private final SecurityConfiguration securityConfiguration;
+    private final GoogleIdTokenVerifier verifier;
 
     public AuthenticationServiceImpl(UsersService usersService,
                                      SecurityMapper securityMapper,
@@ -29,17 +30,41 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.usersService = usersService;
         this.securityMapper = securityMapper;
         this.securityConfiguration = securityConfiguration;
+        this.verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
+                .setAudience(Collections.singletonList(securityConfiguration.getGoogleClientId()))
+                .build();
     }
 
     @Override
     public Optional<LoginResponse> googleLogin(String token) {
         try {
-            GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
-                    .setAudience(Collections.singletonList(securityConfiguration.getGoogleClientId()))
-                    .build();
             GoogleIdToken idToken = verifier.verify(token);
             String userId = this.getOrCreateUser(idToken.getPayload());
             return Optional.of(securityMapper.toResponse(token, userId));
+        } catch (Exception e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Boolean isTokenValid(String token) {
+        try {
+            GoogleIdToken idToken = verifier.verify(token);
+            return idToken != null;
+        } catch(Exception e) {
+            System.out.println("IsTokenValid: " + Arrays.toString(e.getStackTrace()));
+            return false;
+        }
+    }
+
+    @Override
+    public Optional<User> getUserFromToken(String token) {
+        try {
+            GoogleIdToken idToken = verifier.verify(token);
+            String email = idToken.getPayload().getEmail();
+
+            return usersService.getByEmail(email);
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return Optional.empty();

@@ -23,6 +23,6 @@ public class AuthenticationController {
     public LoginResponse googleLogin(@RequestBody GoogleLoginRequest googleLoginRequest) {
         return authenticationService
         .googleLogin(googleLoginRequest.getTokenId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED));
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Google unauthorized"));
     }
 }
