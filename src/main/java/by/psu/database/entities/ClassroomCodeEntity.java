@@ -27,8 +27,8 @@ public class ClassroomCodeEntity {
     @NotNull
     private String classroomCode;
 
-    @ManyToOne
-    @JoinColumn(name="owner_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="owner_id")
     private UserEntity owner;
 
     @OneToMany(mappedBy = "classroomCode")

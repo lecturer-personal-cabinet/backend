@@ -7,6 +7,7 @@ import by.psu.services.security.model.LoginResponse;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserType;
+import by.psu.utils.JwtUtils;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -16,31 +17,34 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final SecurityMapper securityMapper;
     private final UsersService usersService;
-    private final SecurityConfiguration securityConfiguration;
     private final GoogleIdTokenVerifier verifier;
+    private final JwtUtils jwtUtils;
 
     public AuthenticationServiceImpl(UsersService usersService,
                                      SecurityMapper securityMapper,
-                                     SecurityConfiguration securityConfiguration) {
+                                     SecurityConfiguration securityConfiguration,
+                                     JwtUtils jwtUtils) {
         this.usersService = usersService;
         this.securityMapper = securityMapper;
-        this.securityConfiguration = securityConfiguration;
         this.verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
                 .setAudience(Collections.singletonList(securityConfiguration.getGoogleClientId()))
                 .build();
+        this.jwtUtils = jwtUtils;
     }
 
     @Override
     public Optional<LoginResponse> googleLogin(String token) {
         try {
             GoogleIdToken idToken = verifier.verify(token);
-            String userId = this.getOrCreateUser(idToken.getPayload());
-            return Optional.of(securityMapper.toResponse(token, userId));
+            User user = this.getOrCreateUser(idToken.getPayload());
+            String jwtToken = jwtUtils.generateToken(user);
+            return Optional.of(securityMapper.toResponse(jwtToken, user.getId()));
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return Optional.empty();
@@ -50,8 +54,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Boolean isTokenValid(String token) {
         try {
-            GoogleIdToken idToken = verifier.verify(token);
-            return idToken != null;
+            String userId = jwtUtils.getIdFromToken(token);
+            return usersService.getUserById(userId)
+                    .map(user -> jwtUtils.validateToken(token, user))
+                    .orElse(false);
         } catch(Exception e) {
             System.out.println("IsTokenValid: " + Arrays.toString(e.getStackTrace()));
             return false;
@@ -61,28 +67,26 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Optional<User> getUserFromToken(String token) {
         try {
-            GoogleIdToken idToken = verifier.verify(token);
-            String email = idToken.getPayload().getEmail();
-
-            return usersService.getByEmail(email);
+            String userId = jwtUtils.getIdFromToken(token);
+            return usersService.getUserById(userId);
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return Optional.empty();
         }
     }
 
-    private String getOrCreateUser(GoogleIdToken.Payload googleUserPayload) {
+    private User getOrCreateUser(GoogleIdToken.Payload googleUserPayload) {
         Optional<User> maybeUser = usersService.getByEmail(googleUserPayload.getEmail());
 
         if(maybeUser.isEmpty()) {
             User user = new User();
-            user.setType(UserType.FULL_TIME_STUDENT);
+            user.setType(UserType.UNKNOWN);
             user.setFirstName((String) googleUserPayload.get("given_name"));
             user.setLastName((String) googleUserPayload.get("family_name"));
             user.setEmail(googleUserPayload.getEmail());
-            return usersService.saveUser(user).getId();
+            return usersService.saveUser(user);
         } else {
-            return maybeUser.get().getId();
+            return maybeUser.get();
         }
     }
 }

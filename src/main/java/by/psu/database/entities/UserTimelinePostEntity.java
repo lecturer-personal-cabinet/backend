@@ -27,7 +27,7 @@ public class UserTimelinePostEntity {
     @Column(name = "created_ts")
     private Timestamp createdTs;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
     private UserEntity sender;
 }

@@ -18,11 +18,11 @@ public class ClassroomCodeAssignmentEntity {
     @Column(name = "id", columnDefinition = "entity_key")
     private String id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classroom_code_id")
     private ClassroomCodeEntity classroomCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 }

@@ -6,12 +6,12 @@ import by.psu.database.entities.UserProfileEntity;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserProfile;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        unmappedSourcePolicy = ReportingPolicy.IGNORE)
 @Component
 public interface UserMapper {
     @Mapping(source = "groupId", target = "group.id")
@@ -25,4 +25,20 @@ public interface UserMapper {
     UserProfile toDto(UserProfileEntity entity);
     @Mapping(source = "userId", target = "user.id")
     UserProfileEntity toEntity(UserProfile dto, String userId);
+
+    @AfterMapping
+    default UserEntity doAfterMapping(@MappingTarget UserEntity entity) {
+        if(entity.getGroup().getId() == null)
+            entity.setGroup(null);
+
+        return entity;
+    }
+
+    @AfterMapping
+    default UserProfileEntity doAfterMapping(@MappingTarget UserProfileEntity entity) {
+        if(entity.getUser().getId() == null)
+            entity.setUser(null);
+
+        return entity;
+    }
 }

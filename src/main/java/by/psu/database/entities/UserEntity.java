@@ -35,7 +35,7 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 
@@ -45,7 +45,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "sender")
     private Set<UserTimelinePostEntity> userTimelinePosts;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "user")
     private UserProfileEntity profileEntity;
 }
