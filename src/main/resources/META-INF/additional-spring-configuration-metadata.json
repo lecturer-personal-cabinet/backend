@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "authentication.googleClientId",
+      "type": "java.lang.String",
+      "description": "Description for authentication.googleClientId."
+  }
+] }

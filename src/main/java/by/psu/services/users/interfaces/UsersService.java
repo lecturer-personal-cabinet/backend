@@ -13,6 +13,8 @@ public interface UsersService {
     List<User> getAllUsers();
     List<User> getAllUsersRelatedToGroup(String groupId);
     Optional<User> getUserById(String id);
+    User saveUser(User user);
+    Optional<User> getByEmail(String email);
 
     List<Group> getAllGroups();
     Optional<Group> getGroupRelatedToUser(String userId);

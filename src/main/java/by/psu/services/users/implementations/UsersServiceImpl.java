@@ -59,6 +59,20 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public User saveUser(User user) {
+        UserEntity entityToSave = userMapper.toEntity(user);
+        UserEntity savedEntity = usersRepository.save(entityToSave);
+        return userMapper.toDto(savedEntity);
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        return usersRepository
+                .findByEmail(email)
+                .map(userMapper::toDto);
+    }
+
+    @Override
     public List<Group> getAllGroups() {
         return groupsRepository
                 .findAll()

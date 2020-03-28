@@ -12,7 +12,7 @@ import java.util.TimeZone;
 public class UserProfile {
     private String id;
     private String description;
-    private TimeZone timezone;
+    private String timezone;
     private String address;
     private String phoneNumber;
 }
