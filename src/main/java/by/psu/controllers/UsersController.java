@@ -3,11 +3,9 @@ package by.psu.controllers;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
+import by.psu.services.users.model.UserProfile;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -55,5 +53,18 @@ public class UsersController {
         return usersService
                 .getGroupById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find group by ID"));
+    }
+
+    @GetMapping(path = "/users/{userId}/profile")
+    public UserProfile getUserProfile(@PathVariable("userId") String userId) {
+        return usersService
+                .getUserProfile(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user profile"));
+    }
+
+    @PostMapping(path = "/users/{userId}/profile")
+    public UserProfile saveUserProfile(@RequestBody UserProfile userProfile,
+                                       @PathVariable("userId") String userId) {
+        return usersService.saveUserProfile(userId, userProfile);
     }
 }

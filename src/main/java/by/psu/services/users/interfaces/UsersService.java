@@ -2,6 +2,7 @@ package by.psu.services.users.interfaces;
 
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
+import by.psu.services.users.model.UserProfile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface UsersService {
     List<Group> getAllGroups();
     Optional<Group> getGroupRelatedToUser(String userId);
     Optional<Group> getGroupById(String id);
+
+    Optional<UserProfile> getUserProfile(String userId);
+    UserProfile saveUserProfile(String userId, UserProfile userProfile);
 }

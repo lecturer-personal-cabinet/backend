@@ -1,12 +1,15 @@
 package by.psu.services.users.implementations;
 
 import by.psu.database.entities.UserEntity;
+import by.psu.database.entities.UserProfileEntity;
 import by.psu.database.repositories.GroupsRepository;
+import by.psu.database.repositories.UserProfileRepository;
 import by.psu.database.repositories.UsersRepository;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.mappers.UserMapper;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
+import by.psu.services.users.model.UserProfile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +21,16 @@ public class UsersServiceImpl implements UsersService {
     private final UserMapper userMapper;
     private final UsersRepository usersRepository;
     private final GroupsRepository groupsRepository;
+    private final UserProfileRepository userProfileRepository;
 
     public UsersServiceImpl(UserMapper userMapper,
                             UsersRepository usersRepository,
-                            GroupsRepository groupsRepository) {
+                            GroupsRepository groupsRepository,
+                            UserProfileRepository userProfileRepository) {
         this.userMapper = userMapper;
         this.usersRepository = usersRepository;
         this.groupsRepository = groupsRepository;
+        this.userProfileRepository = userProfileRepository;
     }
 
     @Override
@@ -74,5 +80,19 @@ public class UsersServiceImpl implements UsersService {
         return groupsRepository
                 .findById(id)
                 .map(userMapper::toDto);
+    }
+
+    @Override
+    public Optional<UserProfile> getUserProfile(String userId) {
+        return userProfileRepository
+                .findByUser_Id(userId)
+                .map(userMapper::toDto);
+    }
+
+    @Override
+    public UserProfile saveUserProfile(String userId, UserProfile userProfile) {
+        UserProfileEntity entityToSave = userMapper.toEntity(userProfile, userId);
+        UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
+        return userMapper.toDto(savedEntity);
     }
 }

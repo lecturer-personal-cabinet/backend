@@ -44,4 +44,8 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "sender")
     private Set<UserTimelinePostEntity> userTimelinePosts;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private UserProfileEntity profileEntity;
 }
