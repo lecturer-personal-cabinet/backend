@@ -25,7 +25,6 @@ public class TimelineController {
                 consumes = "application/json")
     public UserTimelinePost saveUserTimelinePost(@RequestBody UserTimelinePost userTimelinePost,
                                                  @PathVariable("userId") String userId) {
-        userTimelinePost.setSenderId(userId);
-        return userTimelineService.saveUserTimelinePost(userTimelinePost);
+        return userTimelineService.saveUserTimelinePost(userId, userTimelinePost);
     }
 }

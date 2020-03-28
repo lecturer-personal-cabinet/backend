@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface TimelineMapper {
-    @Mapping(source = "sender.id", target = "senderId")
     @Mapping(source = "sender.firstName", target = "senderFirstName")
     @Mapping(source = "sender.lastName", target = "senderLastName")
     UserTimelinePost toDto(UserTimelinePostEntity entity);
 
-    @Mapping(source = "senderId", target = "sender.id")
-    UserTimelinePostEntity toEntity(UserTimelinePost dto);
+    @Mapping(source = "userId", target = "sender.id")
+    UserTimelinePostEntity toEntity(UserTimelinePost dto, String userId);
 }

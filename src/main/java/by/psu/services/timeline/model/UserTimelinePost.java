@@ -14,7 +14,6 @@ public class UserTimelinePost {
     private String title;
     private String content;
     private Timestamp createdTs;
-    private String senderId;
     private String senderFirstName;
     private String senderLastName;
 }

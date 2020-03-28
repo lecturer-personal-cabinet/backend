@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface UserTimelineService {
     List<UserTimelinePost> getAllUserTimelinePosts(String userId);
-    UserTimelinePost saveUserTimelinePost(UserTimelinePost post);
+    UserTimelinePost saveUserTimelinePost(String userId, UserTimelinePost post);
 }

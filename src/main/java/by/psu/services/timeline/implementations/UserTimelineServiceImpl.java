@@ -31,8 +31,8 @@ public class UserTimelineServiceImpl implements UserTimelineService {
     }
 
     @Override
-    public UserTimelinePost saveUserTimelinePost(UserTimelinePost post) {
-        UserTimelinePostEntity entityToSave = timelineMapper.toEntity(post);
+    public UserTimelinePost saveUserTimelinePost(String userId, UserTimelinePost post) {
+        UserTimelinePostEntity entityToSave = timelineMapper.toEntity(post, userId);
         UserTimelinePostEntity savedEntity = userTimelinePostRepository.save(entityToSave);
         return timelineMapper.toDto(savedEntity);
     }
