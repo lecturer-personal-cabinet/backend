@@ -4,5 +4,5 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public enum UserType {
-    LECTURER, FULL_TIME_STUDENT, UNKNOWN
+    ADMIN, USER, PENDING_ADMIN, UNKNOWN
 }

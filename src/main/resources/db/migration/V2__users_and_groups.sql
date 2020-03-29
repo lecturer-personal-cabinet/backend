@@ -1,4 +1,4 @@
-CREATE TYPE user_type AS enum ('LECTURER', 'FULL_TIME_STUDENT', 'UNKNOWN');
+CREATE TYPE user_type AS enum ('ADMIN', 'USER', 'PENDING_ADMIN', 'UNKNOWN');
 
 CREATE TABLE groups (
     id entity_key PRIMARY KEY  DEFAULT generate_entity_key('GRP'),
