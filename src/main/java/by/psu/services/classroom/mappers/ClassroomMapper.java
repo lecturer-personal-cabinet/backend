@@ -37,19 +37,11 @@ public interface ClassroomMapper {
 
     @AfterMapping
     default ClassroomCodeAssignmentEntity doAfterMapping(@MappingTarget ClassroomCodeAssignmentEntity entity) {
-        try {
-            if (entity.getClassroomCode().getId() == null)
-                entity.setClassroomCode(null);
-        } catch (Exception e) {
+        if (entity.getClassroomCode() != null && entity.getClassroomCode().getId() == null)
             entity.setClassroomCode(null);
-        }
 
-        try {
-            if (entity.getGroup().getId() == null)
-                entity.setGroup(null);
-        } catch(Exception e) {
+        if (entity.getGroup() != null && entity.getGroup().getId() == null)
             entity.setGroup(null);
-        }
 
         return entity;
     }

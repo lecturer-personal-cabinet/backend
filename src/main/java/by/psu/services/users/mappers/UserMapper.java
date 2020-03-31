@@ -40,12 +40,8 @@ public interface UserMapper {
 
     @AfterMapping
     default UserProfileEntity doAfterMapping(@MappingTarget UserProfileEntity entity) {
-        try {
-            if (entity.getUser().getId() == null)
-                entity.setUser(null);
-        } catch(Exception e) {
+        if (entity.getUser() != null && entity.getUser().getId() == null)
             entity.setUser(null);
-        }
 
         return entity;
     }
