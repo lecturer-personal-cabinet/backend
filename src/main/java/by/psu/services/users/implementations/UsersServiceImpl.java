@@ -106,8 +106,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public UserProfile saveUserProfile(String userId, UserProfile userProfile) {
         UserProfileEntity entityToSave = userMapper.toEntity(userProfile, userId);
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(userId);
+        UserEntity userEntity = usersRepository.findById(userId).orElseThrow();
         entityToSave.setUser(userEntity);
         UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
         return userMapper.toDto(savedEntity);
