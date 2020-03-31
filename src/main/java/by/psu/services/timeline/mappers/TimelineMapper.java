@@ -20,8 +20,12 @@ public interface TimelineMapper {
 
     @AfterMapping
     default UserTimelinePostEntity doAfterMapping(@MappingTarget UserTimelinePostEntity entity) {
-        if(entity.getSender().getId() == null)
+        try {
+            if (entity.getSender().getId() == null)
+                entity.setSender(null);
+        } catch(Exception e){
             entity.setSender(null);
+        }
 
         return entity;
     }

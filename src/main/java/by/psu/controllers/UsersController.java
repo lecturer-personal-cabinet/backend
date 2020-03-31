@@ -67,4 +67,22 @@ public class UsersController {
                                        @PathVariable("userId") String userId) {
         return usersService.saveUserProfile(userId, userProfile);
     }
+
+    @PutMapping(path = "/users/{userId}")
+    public UserProfile updateUserProfile(@RequestBody UserProfile userProfile,
+                                       @PathVariable("userId") String userId) {
+        return usersService.saveUserProfile(userId, userProfile);
+    }
+
+    @PostMapping(path = "/users/{userId}")
+    public User saveUser(@RequestBody User user, @PathVariable("userId") String userId) {
+        user.setId(userId);
+        return usersService.saveUser(user);
+    }
+
+    @PutMapping(path = "/users/{userId}")
+    public User updateUser(@RequestBody User user, @PathVariable("userId") String userId) {
+        user.setId(userId);
+        return usersService.saveUser(user);
+    }
 }

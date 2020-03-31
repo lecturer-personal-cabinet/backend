@@ -28,16 +28,24 @@ public interface UserMapper {
 
     @AfterMapping
     default UserEntity doAfterMapping(@MappingTarget UserEntity entity) {
-        if(entity.getGroup().getId() == null)
+        try {
+            if (entity.getGroup().getId() == null)
+                entity.setGroup(null);
+        } catch(Exception e) {
             entity.setGroup(null);
+        }
 
         return entity;
     }
 
     @AfterMapping
     default UserProfileEntity doAfterMapping(@MappingTarget UserProfileEntity entity) {
-        if(entity.getUser().getId() == null)
+        try {
+            if (entity.getUser().getId() == null)
+                entity.setUser(null);
+        } catch(Exception e) {
             entity.setUser(null);
+        }
 
         return entity;
     }
