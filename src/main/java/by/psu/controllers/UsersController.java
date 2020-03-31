@@ -68,7 +68,7 @@ public class UsersController {
         return usersService.saveUserProfile(userId, userProfile);
     }
 
-    @PutMapping(path = "/users/{userId}")
+    @PutMapping(path = "/users/{userId}/profile")
     public UserProfile updateUserProfile(@RequestBody UserProfile userProfile,
                                        @PathVariable("userId") String userId) {
         return usersService.saveUserProfile(userId, userProfile);
