@@ -6,7 +6,6 @@ import by.psu.services.security.mappers.SecurityMapper;
 import by.psu.services.security.model.LoginResponse;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.model.User;
-import by.psu.services.users.model.UserType;
 import by.psu.utils.JwtUtils;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -80,7 +78,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         if(maybeUser.isEmpty()) {
             User user = new User();
-            user.setType(UserType.UNKNOWN);
             user.setFirstName((String) googleUserPayload.get("given_name"));
             user.setLastName((String) googleUserPayload.get("family_name"));
             user.setEmail(googleUserPayload.getEmail());

@@ -14,9 +14,6 @@ public class User {
     private String id;
 
     @NotNull
-    private UserType type;
-
-    @NotNull
     private String firstName;
 
     @NotNull

@@ -74,9 +74,8 @@ public class UsersController {
         return usersService.saveUserProfile(userId, userProfile);
     }
 
-    @PostMapping(path = "/users/{userId}")
-    public User saveUser(@RequestBody User user, @PathVariable("userId") String userId) {
-        user.setId(userId);
+    @PostMapping(path = "/users")
+    public User saveUser(@RequestBody User user) {
         return usersService.saveUser(user);
     }
 

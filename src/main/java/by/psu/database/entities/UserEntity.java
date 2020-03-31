@@ -1,6 +1,5 @@
 package by.psu.database.entities;
 
-import by.psu.services.users.model.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +17,6 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "entity_key")
     private String id;
-
-    @Column(name = "type", columnDefinition = "user_type")
-    @Enumerated(EnumType.STRING)
-    private UserType type;
 
     @Column(name = "first_name")
     private String firstName;
