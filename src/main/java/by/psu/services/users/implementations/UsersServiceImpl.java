@@ -105,9 +105,12 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public UserProfile saveUserProfile(String userId, UserProfile userProfile) {
+        Optional<UserProfileEntity> maybeExistingProfile = userProfileRepository.findByUser_Id(userId);
+
         UserProfileEntity entityToSave = userMapper.toEntity(userProfile, userId);
         UserEntity userEntity = usersRepository.findById(userId).orElseThrow();
         entityToSave.setUser(userEntity);
+        maybeExistingProfile.ifPresent(entity -> entityToSave.setId(entity.getId()));
         UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
         return userMapper.toDto(savedEntity);
     }

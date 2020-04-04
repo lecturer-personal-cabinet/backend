@@ -34,12 +34,12 @@ public class UserEntity {
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private Set<ClassroomCodeEntity> classroomCodes;
 
-    @OneToMany(mappedBy = "sender")
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
     private Set<UserTimelinePostEntity> userTimelinePosts;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserProfileEntity profileEntity;
 }
