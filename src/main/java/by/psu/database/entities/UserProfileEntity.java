@@ -17,8 +17,8 @@ public class UserProfileEntity {
     @Column(name = "id", columnDefinition = "entity_key")
     private String id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
     @Column(name = "description")
