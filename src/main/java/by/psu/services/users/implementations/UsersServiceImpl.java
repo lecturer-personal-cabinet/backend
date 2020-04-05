@@ -13,6 +13,7 @@ import by.psu.services.users.model.UserProfile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,12 +35,14 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return usersRepository
+    public List<User> getAllUsers(Map<String, String> filters) {
+        List<User> users = usersRepository
                 .findAll()
                 .stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
+
+        return filterUsers(users, filters);
     }
 
     @Override
@@ -113,5 +116,14 @@ public class UsersServiceImpl implements UsersService {
         maybeExistingProfile.ifPresent(entity -> entityToSave.setId(entity.getId()));
         UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
         return userMapper.toDto(savedEntity);
+    }
+
+    private List<User> filterUsers(List<User> users, Map<String, String> filters) {
+        String searchValue = filters.getOrDefault("search", "");
+
+        return users
+                .stream()
+                .filter(user -> user.getFirstName().contains(searchValue) || user.getLastName().contains(searchValue))
+                .collect(Collectors.toList());
     }
 }

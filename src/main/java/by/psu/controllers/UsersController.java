@@ -5,10 +5,12 @@ import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserProfile;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -20,8 +22,8 @@ public class UsersController {
     }
 
     @GetMapping(path = "/users")
-    public List<User> getAllUsers() {
-        return usersService.getAllUsers();
+    public List<User> getAllUsers(@RequestParam Map<String, String> filters) {
+        return usersService.getAllUsers(filters);
     }
 
     @GetMapping(path = "/groups/{groupId}/users")

@@ -6,11 +6,12 @@ import by.psu.services.users.model.UserProfile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
 public interface UsersService {
-    List<User> getAllUsers();
+    List<User> getAllUsers(Map<String, String> filters);
     List<User> getAllUsersRelatedToGroup(String groupId);
     Optional<User> getUserById(String id);
     Optional<User> getByEmail(String email);
