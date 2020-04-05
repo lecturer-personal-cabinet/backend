@@ -123,7 +123,8 @@ public class UsersServiceImpl implements UsersService {
 
         return users
                 .stream()
-                .filter(user -> user.getFirstName().contains(searchValue) || user.getLastName().contains(searchValue))
+                .filter(user -> user.getFirstName().toLowerCase().contains(searchValue.toLowerCase()) ||
+                        user.getLastName().toLowerCase().contains(searchValue.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }
