@@ -5,6 +5,8 @@ import by.psu.database.entities.UserProfileEntity;
 import by.psu.database.repositories.GroupsRepository;
 import by.psu.database.repositories.UserProfileRepository;
 import by.psu.database.repositories.UsersRepository;
+import by.psu.services.dialogs.interfaces.DialogsService;
+import by.psu.services.dialogs.model.Dialog;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.mappers.UserMapper;
 import by.psu.services.users.model.Group;
@@ -23,15 +25,18 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
     private final GroupsRepository groupsRepository;
     private final UserProfileRepository userProfileRepository;
+    private final DialogsService dialogsService;
 
     public UsersServiceImpl(UserMapper userMapper,
                             UsersRepository usersRepository,
                             GroupsRepository groupsRepository,
-                            UserProfileRepository userProfileRepository) {
+                            UserProfileRepository userProfileRepository,
+                            DialogsService dialogsService) {
         this.userMapper = userMapper;
         this.usersRepository = usersRepository;
         this.groupsRepository = groupsRepository;
         this.userProfileRepository = userProfileRepository;
+        this.dialogsService = dialogsService;
     }
 
     @Override
@@ -116,6 +121,11 @@ public class UsersServiceImpl implements UsersService {
         maybeExistingProfile.ifPresent(entity -> entityToSave.setId(entity.getId()));
         UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
         return userMapper.toDto(savedEntity);
+    }
+
+    @Override
+    public List<Dialog> getUserDialogs(String userId) {
+        return dialogsService.getAllDialogsByUserId(userId);
     }
 
     private List<User> filterUsers(List<User> users, Map<String, String> filters) {

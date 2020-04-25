@@ -1,5 +1,6 @@
 package by.psu.services.users.interfaces;
 
+import by.psu.services.dialogs.model.Dialog;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserProfile;
@@ -23,4 +24,6 @@ public interface UsersService {
 
     Optional<UserProfile> getUserProfile(String userId);
     UserProfile saveUserProfile(String userId, UserProfile userProfile);
+
+    List<Dialog> getUserDialogs(String userId);
 }

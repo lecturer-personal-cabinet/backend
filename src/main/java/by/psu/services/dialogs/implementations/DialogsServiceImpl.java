@@ -16,16 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class DialogsServiceImpl implements DialogsService {
     private final DialogsMapper dialogsMapper;
-    private final DialogRepository dialogRepository;
     private final DialogParticipantRepository dialogParticipantRepository;
     private final DialogMessageRepository dialogMessageRepository;
 
     public DialogsServiceImpl(DialogsMapper dialogsMapper,
-                              DialogRepository dialogRepository,
                               DialogParticipantRepository dialogParticipantRepository,
                               DialogMessageRepository dialogMessageRepository) {
         this.dialogsMapper = dialogsMapper;
-        this.dialogRepository = dialogRepository;
         this.dialogParticipantRepository = dialogParticipantRepository;
         this.dialogMessageRepository = dialogMessageRepository;
     }

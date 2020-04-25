@@ -1,5 +1,6 @@
 package by.psu.controllers;
 
+import by.psu.services.dialogs.model.Dialog;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
@@ -85,5 +86,10 @@ public class UsersController {
     public User updateUser(@RequestBody User user, @PathVariable("userId") String userId) {
         user.setId(userId);
         return usersService.saveUser(user);
+    }
+
+    @GetMapping(path = "/users/{userId}/dialogs")
+    public List<Dialog> getUserDialogs(@PathVariable("userId") String userId) {
+        return usersService.getUserDialogs(userId);
     }
 }

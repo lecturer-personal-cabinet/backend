@@ -1,7 +1,6 @@
 package by.psu.controllers;
 
 import by.psu.services.dialogs.interfaces.DialogsService;
-import by.psu.services.dialogs.model.Dialog;
 import by.psu.services.dialogs.model.DialogMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +18,8 @@ public class DialogsController {
         this.dialogsService = dialogsService;
     }
 
-    @GetMapping(path = "/users/{userId}/dialogs}", produces = "application/json")
-    public List<Dialog> getAllDialogsByUserId(@PathVariable("userId") String userId) {
-        return dialogsService.getAllDialogsByUserId(userId);
-    }
-
-    @GetMapping(path = "/users/{userId}/dialogs/{dialogId}")
-    public List<DialogMessage> getAllMessagesByDialogId(@PathVariable("userId") String userId,
-                                                        @PathVariable("dialogId") String dialogId) {
+    @GetMapping(path = "/dialogs/{dialogId}")
+    public List<DialogMessage> getAllMessagesByDialogId(@PathVariable("dialogId") String dialogId) {
         return dialogsService.getAllMessagesByDialogId(dialogId);
     }
 }

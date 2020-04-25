@@ -1,16 +1,13 @@
 package by.psu.database.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "dialog_participant")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class DialogParticipantEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

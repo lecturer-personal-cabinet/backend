@@ -1,19 +1,16 @@
 package by.psu.services.dialogs.model;
 
+import by.psu.services.users.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Dialog {
+public class DialogParticipant {
     private String id;
-    private String name;
-    private List<DialogMessage> messages;
-    private List<DialogParticipant> participants;
+    private User user;
 }

@@ -14,5 +14,6 @@ CREATE TABLE dialog_message (
   id entity_key NOT NULL PRIMARY KEY DEFAULT generate_entity_key('MSG'),
   dialog_id entity_key NOT NULL REFERENCES dialog(id),
   created_ts timestamp NOT NULL DEFAULT NOW(),
-  content TEXT NOT NULL
+  content TEXT NOT NULL,
+  sender_id entity_key NOT NULL REFERENCES users(id)
 );

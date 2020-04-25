@@ -34,6 +34,9 @@ public class UserEntity {
     @JoinColumn(name = "group_id")
     private GroupEntity group;
 
+    @OneToMany(mappedBy="sender", fetch = FetchType.LAZY)
+    private Set<DialogMessageEntity> messages;
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private Set<ClassroomCodeEntity> classroomCodes;
 

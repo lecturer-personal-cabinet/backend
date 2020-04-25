@@ -1,16 +1,15 @@
 package by.psu.database.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "dialog")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter
+@Getter
 public class DialogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +18,10 @@ public class DialogEntity {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy="dialog")
+    private Set<DialogMessageEntity> messages;
+
+    @OneToMany(mappedBy="dialog")
+    private Set<DialogParticipantEntity> participants;
 }
