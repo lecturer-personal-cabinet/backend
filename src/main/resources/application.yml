@@ -3,14 +3,14 @@ spring:
     active: ${APP_PROFILE:prod}
   flyway:
     enabled: true
-    url: jdbc:postgresql://localhost:5432/lpc
+    url: jdbc:postgresql://localhost:5427/lpc
     user: postgres
     password: postgres
     baselineOnMigrate: true
     schemas:
       - public
   datasource:
-    url: jdbc:postgresql://localhost:5432/lpc
+    url: jdbc:postgresql://localhost:5427/lpc
     username: postgres
     password: postgres
   jpa:
