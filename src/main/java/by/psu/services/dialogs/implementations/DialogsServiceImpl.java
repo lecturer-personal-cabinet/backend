@@ -45,4 +45,9 @@ public class DialogsServiceImpl implements DialogsService {
                 .map(dialogsMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void updateMessagesReadStatus(String dialogId, Boolean status) {
+        dialogMessageRepository.updateStatusInAllMessages(dialogId, status);
+    }
 }

@@ -15,5 +15,6 @@ CREATE TABLE dialog_message (
   dialog_id entity_key NOT NULL REFERENCES dialog(id),
   created_ts timestamp NOT NULL DEFAULT NOW(),
   content TEXT NOT NULL,
-  sender_id entity_key NOT NULL REFERENCES users(id)
+  sender_id entity_key NOT NULL REFERENCES users(id),
+  is_read BOOLEAN NOT NULL DEFAULT false
 );

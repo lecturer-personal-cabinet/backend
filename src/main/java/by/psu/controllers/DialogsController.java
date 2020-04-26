@@ -2,10 +2,8 @@ package by.psu.controllers;
 
 import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.model.DialogMessage;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import by.psu.services.dialogs.model.UpdateMessageReadStatusRequest;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,11 @@ public class DialogsController {
     @GetMapping(path = "/dialogs/{dialogId}")
     public List<DialogMessage> getAllMessagesByDialogId(@PathVariable("dialogId") String dialogId) {
         return dialogsService.getAllMessagesByDialogId(dialogId);
+    }
+
+    @PatchMapping(path = "/dialogs/{dialogId}/messages/is-read")
+    public void updateMessagesReadStatus(@PathVariable("dialogId") String dialogId,
+                                         @RequestBody UpdateMessageReadStatusRequest updateMessageReadStatusRequest) {
+        dialogsService.updateMessagesReadStatus(dialogId, updateMessageReadStatusRequest.getStatus());
     }
 }

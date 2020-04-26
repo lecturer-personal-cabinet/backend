@@ -18,4 +18,5 @@ public class DialogMessage {
     private String content;
     private LocalDateTime createdTs;
     private User sender;
+    private Boolean isRead;
 }

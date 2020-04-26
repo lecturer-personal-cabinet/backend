@@ -30,4 +30,7 @@ public class DialogMessageEntity {
     @JoinColumn(name="sender_id")
     private UserEntity sender;
 
+    @Column(name = "is_read")
+    private Boolean isRead;
+
 }

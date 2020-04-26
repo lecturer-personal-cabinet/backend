@@ -36,6 +36,7 @@ public class DialogsMapper {
                 .createdTs(entity.getCreatedTs().toLocalDateTime())
                 .dialogId(entity.getDialog().getId())
                 .sender(userMapper.toDto(entity.getSender()))
+                .isRead(entity.getIsRead())
                 .build();
     }
 
