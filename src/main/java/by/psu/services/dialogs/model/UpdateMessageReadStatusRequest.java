@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateMessageReadStatusRequest {
     private Boolean status;
+    private String senderId;
 }

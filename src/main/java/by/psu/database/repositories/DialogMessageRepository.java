@@ -13,8 +13,9 @@ import java.util.List;
 @Repository
 public interface DialogMessageRepository extends JpaRepository<DialogMessageEntity, String> {
     List<DialogMessageEntity> getAllByDialogId(String dialogId);
+
     @Modifying
-    @Query("UPDATE DialogMessageEntity msg SET msg.isRead = :status WHERE msg.dialog.id = :dialogId")
+    @Query("UPDATE DialogMessageEntity msg SET msg.isRead = :status WHERE msg.dialog.id = :dialogId  AND msg.sender.id = :senderId")
     @Transactional
-    int updateStatusInAllMessages(@Param("dialogId") String dialogId, @Param("status") Boolean status);
+    int updateStatusInAllMessages(@Param("dialogId") String dialogId, @Param("status") Boolean status, @Param("senderId") String senderId);
 }

@@ -21,9 +21,12 @@ public class DialogsController {
         return dialogsService.getAllMessagesByDialogId(dialogId);
     }
 
-    @PatchMapping(path = "/dialogs/{dialogId}/messages/is-read")
+    @PostMapping(path = "/dialogs/{dialogId}/messages/is-read")
     public void updateMessagesReadStatus(@PathVariable("dialogId") String dialogId,
                                          @RequestBody UpdateMessageReadStatusRequest updateMessageReadStatusRequest) {
-        dialogsService.updateMessagesReadStatus(dialogId, updateMessageReadStatusRequest.getStatus());
+        dialogsService.updateMessagesReadStatus(
+                dialogId,
+                updateMessageReadStatusRequest.getSenderId(),
+                updateMessageReadStatusRequest.getStatus());
     }
 }
