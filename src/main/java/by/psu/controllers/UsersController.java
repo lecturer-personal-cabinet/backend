@@ -6,12 +6,13 @@ import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserProfile;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @CrossOrigin
@@ -93,8 +94,12 @@ public class UsersController {
         return usersService.getUserDialogs(userId);
     }
 
-    @GetMapping(path = "/users/{userId}/dialogs/count")
-    public Integer getUserDialogsCount(@PathVariable("userId") String userId) {
-        return usersService.getUserDialogs(userId).size();
+    @GetMapping(path = "/users/{userId}/dialogs/messages/count")
+    public Integer getUserMessagesCount(@PathVariable("userId") String userId, @RequestParam Map<String, String> params) {
+        Boolean isRead = params.get("isRead").equals("true");
+        return (int) usersService.getUserDialogs(userId)
+                .parallelStream()
+                .flatMap(dialog -> dialog.getMessages().parallelStream())
+                .filter(msg -> msg.getIsRead() == isRead).count();
     }
 }
