@@ -47,7 +47,7 @@ public class DialogsServiceImpl implements DialogsService {
     }
 
     @Override
-    public void updateMessagesReadStatus(String dialogId, String senderId, Boolean status) {
-        dialogMessageRepository.updateStatusInAllMessages(dialogId, status, senderId);
+    public void updateMessagesReadStatus(String dialogId, List<String> senders, Boolean status) {
+        dialogMessageRepository.updateStatusInAllMessages(dialogId, status, senders);
     }
 }

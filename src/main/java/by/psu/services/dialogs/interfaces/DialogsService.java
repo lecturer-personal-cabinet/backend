@@ -10,5 +10,5 @@ import java.util.List;
 public interface DialogsService {
     List<Dialog> getAllDialogsByUserId(String userId);
     List<DialogMessage> getAllMessagesByDialogId(String dialogId);
-    void updateMessagesReadStatus(String dialogId, String senderId, Boolean status);
+    void updateMessagesReadStatus(String dialogId, List<String> senders, Boolean status);
 }

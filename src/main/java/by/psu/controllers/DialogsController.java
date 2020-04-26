@@ -26,7 +26,7 @@ public class DialogsController {
                                          @RequestBody UpdateMessageReadStatusRequest updateMessageReadStatusRequest) {
         dialogsService.updateMessagesReadStatus(
                 dialogId,
-                updateMessageReadStatusRequest.getSenderId(),
+                updateMessageReadStatusRequest.getSenders(),
                 updateMessageReadStatusRequest.getStatus());
     }
 }

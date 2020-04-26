@@ -15,7 +15,7 @@ public interface DialogMessageRepository extends JpaRepository<DialogMessageEnti
     List<DialogMessageEntity> getAllByDialogId(String dialogId);
 
     @Modifying
-    @Query("UPDATE DialogMessageEntity msg SET msg.isRead = :status WHERE msg.dialog.id = :dialogId  AND msg.sender.id = :senderId")
+    @Query("UPDATE DialogMessageEntity msg SET msg.isRead = :status WHERE msg.dialog.id = :dialogId  AND msg.sender.id in :senders")
     @Transactional
-    int updateStatusInAllMessages(@Param("dialogId") String dialogId, @Param("status") Boolean status, @Param("senderId") String senderId);
+    int updateStatusInAllMessages(@Param("dialogId") String dialogId, @Param("status") Boolean status, @Param("senders") List<String> senders);
 }
