@@ -3,6 +3,7 @@ package by.psu.controllers;
 import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.model.DialogMessage;
 import by.psu.services.dialogs.model.UpdateMessageReadStatusRequest;
+import by.psu.services.dialogs.model.UpdateMessageReadStatusResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +23,15 @@ public class DialogsController {
     }
 
     @PostMapping(path = "/dialogs/{dialogId}/messages/is-read")
-    public void updateMessagesReadStatus(@PathVariable("dialogId") String dialogId,
+    public UpdateMessageReadStatusResponse updateMessagesReadStatus(@PathVariable("dialogId") String dialogId,
                                          @RequestBody UpdateMessageReadStatusRequest updateMessageReadStatusRequest) {
-        dialogsService.updateMessagesReadStatus(
+        int updatedNumber = dialogsService.updateMessagesReadStatus(
                 dialogId,
                 updateMessageReadStatusRequest.getExcludeParticipant(),
                 updateMessageReadStatusRequest.getStatus());
+
+        return UpdateMessageReadStatusResponse.builder()
+                .updatedMessagesNumber(updatedNumber)
+                .build();
     }
 }

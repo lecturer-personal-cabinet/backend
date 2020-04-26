@@ -92,4 +92,9 @@ public class UsersController {
     public List<Dialog> getUserDialogs(@PathVariable("userId") String userId) {
         return usersService.getUserDialogs(userId);
     }
+
+    @GetMapping(path = "/users/{userId}/dialogs/count")
+    public Integer getUserDialogsCount(@PathVariable("userId") String userId) {
+        return usersService.getUserDialogs(userId).size();
+    }
 }
