@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -14,5 +15,6 @@ public interface DialogMessageRepository extends JpaRepository<DialogMessageEnti
     List<DialogMessageEntity> getAllByDialogId(String dialogId);
     @Modifying
     @Query("UPDATE DialogMessageEntity msg SET msg.isRead = :status WHERE msg.dialog.id = :dialogId")
+    @Transactional
     int updateStatusInAllMessages(@Param("dialogId") String dialogId, @Param("status") Boolean status);
 }
