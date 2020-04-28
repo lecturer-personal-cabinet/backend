@@ -43,6 +43,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
     private Set<UserTimelinePostEntity> userTimelinePosts;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<PortfolioCardEntity> portfolioCards;
+
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserProfileEntity profileEntity;
 }

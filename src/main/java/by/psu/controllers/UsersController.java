@@ -1,6 +1,7 @@
 package by.psu.controllers;
 
 import by.psu.services.dialogs.model.Dialog;
+import by.psu.services.portfolio.model.PortfolioCard;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.model.Group;
 import by.psu.services.users.model.User;
@@ -94,12 +95,8 @@ public class UsersController {
         return usersService.getUserDialogs(userId);
     }
 
-    @GetMapping(path = "/users/{userId}/dialogs/messages/count")
-    public Integer getUserMessagesCount(@PathVariable("userId") String userId, @RequestParam Map<String, String> params) {
-        Boolean isRead = params.get("isRead").equals("true");
-        return (int) usersService.getUserDialogs(userId)
-                .parallelStream()
-                .flatMap(dialog -> dialog.getMessages().parallelStream())
-                .filter(msg -> msg.getIsRead() == isRead).count();
+    @GetMapping(path = "/users/{userId}/portfolio/card")
+    public List<PortfolioCard> getUserPortfolioCards(@PathVariable("userId") String userId) {
+        return usersService.getUserPortfolioCards(userId);
     }
 }

@@ -7,6 +7,8 @@ import by.psu.database.repositories.UserProfileRepository;
 import by.psu.database.repositories.UsersRepository;
 import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.model.Dialog;
+import by.psu.services.portfolio.interfaces.PortfolioService;
+import by.psu.services.portfolio.model.PortfolioCard;
 import by.psu.services.users.interfaces.UsersService;
 import by.psu.services.users.mappers.UserMapper;
 import by.psu.services.users.model.Group;
@@ -26,17 +28,20 @@ public class UsersServiceImpl implements UsersService {
     private final GroupsRepository groupsRepository;
     private final UserProfileRepository userProfileRepository;
     private final DialogsService dialogsService;
+    private final PortfolioService portfolioService;
 
     public UsersServiceImpl(UserMapper userMapper,
                             UsersRepository usersRepository,
                             GroupsRepository groupsRepository,
                             UserProfileRepository userProfileRepository,
-                            DialogsService dialogsService) {
+                            DialogsService dialogsService,
+                            PortfolioService portfolioService) {
         this.userMapper = userMapper;
         this.usersRepository = usersRepository;
         this.groupsRepository = groupsRepository;
         this.userProfileRepository = userProfileRepository;
         this.dialogsService = dialogsService;
+        this.portfolioService = portfolioService;
     }
 
     @Override
@@ -126,6 +131,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<Dialog> getUserDialogs(String userId) {
         return dialogsService.getAllDialogsByUserId(userId);
+    }
+
+    @Override
+    public List<PortfolioCard> getUserPortfolioCards(String userId) {
+        return portfolioService.getByUserId(userId);
     }
 
     private List<User> filterUsers(List<User> users, Map<String, String> filters) {

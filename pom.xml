@@ -65,6 +65,11 @@
 			<artifactId>google-api-client</artifactId>
 			<version>1.30.9</version>
 		</dependency>
+		<dependency>
+			<groupId>com.vladmihalcea</groupId>
+			<artifactId>hibernate-types-52</artifactId>
+			<version>2.9.8</version>
+		</dependency>
 
 	</dependencies>
 

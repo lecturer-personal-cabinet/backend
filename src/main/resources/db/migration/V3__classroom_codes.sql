@@ -6,7 +6,7 @@ CREATE TABLE classroom_codes (
 );
 
 CREATE TABLE classroom_code_assignment (
-  id entity_key NOT NULL DEFAULT generate_entity_key('CCA'),
+  id entity_key NOT NULL PRIMARY KEY DEFAULT generate_entity_key('CCA'),
   classroom_code_id entity_key NOT NULL REFERENCES classroom_codes(id),
   group_id entity_key NOT NULL REFERENCES groups(id),
   UNIQUE (classroom_code_id, group_id)
