@@ -8,7 +8,6 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "user_portfolio_card")
@@ -28,6 +27,9 @@ public class PortfolioCardEntity {
 
     @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "preview_image_link")
     private String previewImageLink;

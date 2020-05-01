@@ -15,6 +15,7 @@ import java.util.List;
 public class PortfolioCard {
     private String id;
     private String title;
+    private String description;
     private String previewImageLink;
     private List<String> tags;
     private String userId;

@@ -22,6 +22,7 @@ public class PortfolioMapper {
                 .previewImageLink(entity.getPreviewImageLink())
                 .tags(List.of(entity.getTags()))
                 .title(entity.getTitle())
+                .description(entity.getDescription())
                 .userId(entity.getUser().getId())
                 .build();
     }
@@ -36,6 +37,7 @@ public class PortfolioMapper {
         entity.setPreviewImageLink(card.getPreviewImageLink());
         entity.setTags(tags.toArray(new String[tags.size()]));
         entity.setTitle(card.getTitle());
+        entity.setDescription(card.getDescription());
         entity.setUser(userEntity);
 
         return entity;
