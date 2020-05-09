@@ -31,11 +31,10 @@ public class PortfolioController {
         return portfolioService.getPortfolioItems(portfolioId);
     }
 
-    @PostMapping(path = "/portfolio/{portfolioId}/items",
+    @PostMapping(path = "/portfolio/items",
             produces = "application/json",
             consumes = "application/json")
-    public List<PortfolioItem> savePortfolioItems(@PathVariable("portfolioId") String portfolioId,
-                                                  @RequestBody List<PortfolioItem> items) {
+    public List<PortfolioItem> savePortfolioItems(@RequestBody List<PortfolioItem> items) {
         return portfolioService.savePortfolioItems(items);
     }
 }
