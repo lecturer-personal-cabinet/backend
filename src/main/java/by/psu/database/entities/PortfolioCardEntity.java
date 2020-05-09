@@ -35,10 +35,13 @@ public class PortfolioCardEntity {
     private String previewImageLink;
 
     @Column(name = "tags", columnDefinition = "varchar(20)[]")
-    @Type( type = "string-array" )
+    @Type(type = "string-array")
     private String[] tags;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @OneToOne(mappedBy = "portfolioCard", fetch = FetchType.LAZY)
+    private PortfolioItemEntity portfolioItem;
 }
