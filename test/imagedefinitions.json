@@ -1,0 +1,14 @@
+[
+  {
+    "name": "frontend",
+    "imageUri": "uladzimirbaklan/lecturer-private-cabinet-frontend:latest"
+  },
+  {
+    "name": "backend",
+    "imageUri": "uladzimirbaklan/lecturer-private-cabinet-backend:latest"
+  },
+  {
+    "name": "message-controller",
+    "imageUri": "uladzimirbaklan/lecturer-private-cabinet-messages-controller:latest"
+  }
+]
