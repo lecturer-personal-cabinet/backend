@@ -8,6 +8,7 @@ import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_portfolio_card")
@@ -42,6 +43,6 @@ public class PortfolioCardEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToOne(mappedBy = "portfolioCard", fetch = FetchType.LAZY)
-    private PortfolioItemEntity portfolioItem;
+    @OneToMany(mappedBy = "portfolioCard")
+    private Set<PortfolioItemEntity> portfolioItems;
 }

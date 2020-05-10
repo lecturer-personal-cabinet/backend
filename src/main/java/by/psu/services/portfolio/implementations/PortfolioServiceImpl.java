@@ -49,7 +49,9 @@ public class PortfolioServiceImpl implements PortfolioService {
         List<PortfolioItemEntity> toSave = items
                 .parallelStream()
                 .map(portfolioMapper::toEntity)
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
+
+        System.out.println("ORDER: " + items.get(0).getOrder());
         return portfolioItemRepository.saveAll(toSave)
                 .parallelStream()
                 .map(portfolioMapper::toDto)

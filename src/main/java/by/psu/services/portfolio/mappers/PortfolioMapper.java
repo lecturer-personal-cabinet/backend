@@ -22,7 +22,7 @@ public class PortfolioMapper {
         return PortfolioCard.builder()
                 .id(entity.getId())
                 .previewImageLink(entity.getPreviewImageLink())
-                .tags(List.of(entity.getTags()))
+                .tags(entity.getTags() == null ? List.of() : List.of(entity.getTags()))
                 .title(entity.getTitle())
                 .description(entity.getDescription())
                 .userId(entity.getUser().getId())
@@ -37,7 +37,7 @@ public class PortfolioMapper {
         var entity = new PortfolioCardEntity();
         entity.setId(card.getId());
         entity.setPreviewImageLink(card.getPreviewImageLink());
-        entity.setTags(tags.toArray(new String[tags.size()]));
+        if(tags != null) entity.setTags(tags.toArray(new String[tags.size()]));
         entity.setTitle(card.getTitle());
         entity.setDescription(card.getDescription());
         entity.setUser(userEntity);

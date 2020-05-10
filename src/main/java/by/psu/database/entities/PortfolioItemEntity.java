@@ -25,14 +25,14 @@ public class PortfolioItemEntity {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "order")
+    @Column(name = "item_order")
     private Integer order;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private String metadata;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_card_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "portfolio_card_id")
     private PortfolioCardEntity portfolioCard;
 }
