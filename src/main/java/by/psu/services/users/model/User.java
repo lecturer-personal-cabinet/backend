@@ -27,4 +27,6 @@ public class User {
 
     @Null
     private String groupId;
+
+    private String image;
 }

@@ -30,6 +30,9 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "image")
+    private String image;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private GroupEntity group;
