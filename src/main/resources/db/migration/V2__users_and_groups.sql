@@ -12,6 +12,6 @@ CREATE TABLE users (
     last_name VARCHAR(50) NOT NULL,
     patronymic VARCHAR(50),
     email VARCHAR(50) NOT NULL,
-    image VARCHAR(50) DEFAULT NULL,
+    image VARCHAR(300) DEFAULT NULL,
     group_id entity_key REFERENCES groups(id) DEFAULT NULL
 );

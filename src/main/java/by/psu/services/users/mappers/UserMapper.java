@@ -9,9 +9,7 @@ import by.psu.services.users.model.UserProfile;
 import org.mapstruct.*;
 import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring")
 @Component
 public interface UserMapper {
     @Mapping(source = "groupId", target = "group.id")
