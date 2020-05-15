@@ -1,16 +1,21 @@
 package by.psu.services.security.implementations;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import by.psu.services.users.interfaces.UsersService;
+import by.psu.services.users.model.User;
 import by.psu.services.users.model.UserTokenData;
 import by.psu.services.users.model.UserType;
+import org.apache.http.HttpException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -41,7 +46,12 @@ public class JwtUserDetailsService implements UserDetailsService {
                 .build();
     }
 
-    public by.psu.services.users.model.User saveUser(by.psu.services.users.model.User user) {
+    public by.psu.services.users.model.User saveUser(by.psu.services.users.model.User user) throws Exception {
+        Optional<User> maybeExistingUser = usersService.getByEmail(user.getEmail());
+        if(maybeExistingUser.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.CONFLICT, "User already exists");
+        }
+
         user.setType(UserType.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersService.saveUser(user);
