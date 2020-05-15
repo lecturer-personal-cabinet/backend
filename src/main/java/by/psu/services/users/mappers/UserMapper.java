@@ -25,7 +25,7 @@ public class UserMapper {
         userEntity.setLastName(dto.getLastName());
         userEntity.setPatronymic(dto.getPatronymic());
         userEntity.setEmail(dto.getEmail());
-        userEntity.setType(dto.getType().name());
+        userEntity.setType(dto.getType() == null ? UserType.USER.name() : dto.getType().name());
         userEntity.setPassword(dto.getPassword());
         userEntity.setImage(dto.getImage());
         userEntity.setGroup(groupEntity);
