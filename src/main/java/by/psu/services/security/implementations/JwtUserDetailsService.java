@@ -34,7 +34,11 @@ public class JwtUserDetailsService implements UserDetailsService {
         by.psu.services.users.model.User user = usersService.getByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
 
-        return UserTokenData.builder().role(user.getType().name()).build();
+        return UserTokenData
+                .builder()
+                .role(user.getType().name())
+                .userId(user.getId())
+                .build();
     }
 
     public by.psu.services.users.model.User saveUser(by.psu.services.users.model.User user) {

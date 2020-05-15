@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserTokenData {
     private String role;
+    private String userId;
 }
