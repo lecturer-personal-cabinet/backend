@@ -39,7 +39,7 @@ public class AuthenticationController {
                 .loadUserByUsername(authenticationRequest.getEmail());
         final UserTokenData userTokenData = userDetailsService.getUserTokenData(authenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails, userTokenData);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, userTokenData.getUserId()));
     }
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
