@@ -29,4 +29,8 @@ public class User {
     private String groupId;
     
     private String image;
+
+    private UserType type;
+
+    private String password;
 }

@@ -30,6 +30,12 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "image")
     private String image;
 
