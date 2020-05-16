@@ -105,7 +105,7 @@ public class DialogsServiceImpl implements DialogsService {
 
         DialogMessagePublishRequest dialogMessagePublishRequest = DialogMessagePublishRequest.builder()
                 .dialogId(existingDialog.getId())
-                .messageId(dialogMessage.getId())
+                .messageId(savedMessage.getId())
                 .receiverId(receiver.getId())
                 .senderId(sender.getId())
                 .build();

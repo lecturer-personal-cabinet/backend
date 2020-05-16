@@ -9,3 +9,8 @@ spring:
     url: jdbc:postgresql://database:5432/lpc
     username: postgres
     password: postgres
+    messages:
+messages:
+  redis:
+    host: redis
+    port: 6379

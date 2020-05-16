@@ -18,6 +18,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public DialogMessagePublishRequest publishMessageRequest(String userId, DialogMessagePublishRequest request) {
+        System.out.println("Send request: " + request);
         try {
             String value = objectMapper.writeValueAsString(request);
             this.stringRedisTemplate.convertAndSend(userId, value);
