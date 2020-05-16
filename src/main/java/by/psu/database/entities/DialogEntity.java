@@ -24,4 +24,7 @@ public class DialogEntity {
 
     @OneToMany(mappedBy="dialog")
     private Set<DialogMessageEntity> messages;
+
+    @OneToMany(mappedBy="dialog")
+    private Set<DialogParticipantEntity> participants;
 }
