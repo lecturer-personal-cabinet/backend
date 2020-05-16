@@ -33,7 +33,7 @@ public class DialogsMapper {
             dialog.setMessages(entity.getMessages().parallelStream().map(this::toDto).collect(Collectors.toList()));
 
         if(entity.getParticipants() != null)
-            dialog.setParticipants(entity.getParticipants().parallelStream().map(DialogParticipantEntity::getId).collect(Collectors.toList()));
+            dialog.setParticipants(entity.getParticipants().parallelStream().map(this::toDto).collect(Collectors.toList()));
 
         return dialog;
     }

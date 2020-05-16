@@ -15,6 +15,6 @@ public class Dialog {
     private String id;
     private String name;
     private List<DialogMessage> messages;
-    private List<String> participants;
+    private List<DialogParticipant> participants;
     private String participantsHash;
 }
