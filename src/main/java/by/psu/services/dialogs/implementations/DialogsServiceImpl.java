@@ -80,14 +80,14 @@ public class DialogsServiceImpl implements DialogsService {
 
         Dialog existingDialog = null;
         if (maybeDialog.isEmpty()) {
+            DialogParticipant senderParticipant = DialogParticipant.builder().user(sender).build();
+            DialogParticipant receiverParticipant = DialogParticipant.builder().user(receiver).build();
             Dialog dialog = Dialog.builder()
                     .name(UUID.randomUUID().toString())
-                    .participants(participants)
+                    .participants(List.of(senderParticipant, receiverParticipant))
                     .participantsHash(participantsHash)
                     .build();
             existingDialog = this.saveDialog(dialog);
-            DialogParticipant senderParticipant = DialogParticipant.builder().user(sender).build();
-            DialogParticipant receiverParticipant = DialogParticipant.builder().user(receiver).build();
             this.saveDialogParticipants(List.of(senderParticipant, receiverParticipant), existingDialog.getId());
         } else {
             existingDialog = dialogsMapper.toDto(maybeDialog.get());
