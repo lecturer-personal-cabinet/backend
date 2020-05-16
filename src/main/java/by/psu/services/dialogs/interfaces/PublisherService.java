@@ -1,9 +1,9 @@
 package by.psu.services.dialogs.interfaces;
 
-import by.psu.services.dialogs.model.DialogMessagePublishRequest;
+import by.psu.services.dialogs.PublishRequest;
 import org.springframework.stereotype.Component;
 
 @Component
 public interface PublisherService {
-    DialogMessagePublishRequest publishMessageRequest(String userId, DialogMessagePublishRequest request);
+    PublishRequest publishMessageRequest(String userId, PublishRequest request);
 }

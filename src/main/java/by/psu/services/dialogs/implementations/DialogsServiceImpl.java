@@ -6,6 +6,7 @@ import by.psu.database.entities.DialogParticipantEntity;
 import by.psu.database.repositories.DialogMessageRepository;
 import by.psu.database.repositories.DialogParticipantRepository;
 import by.psu.database.repositories.DialogRepository;
+import by.psu.services.dialogs.PublishRequest;
 import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.interfaces.PublisherService;
 import by.psu.services.dialogs.mappers.DialogsMapper;
@@ -110,7 +111,14 @@ public class DialogsServiceImpl implements DialogsService {
                 .senderId(sender.getId())
                 .build();
 
-        this.publisherService.publishMessageRequest(receiver.getId(), dialogMessagePublishRequest);
+        PublishRequest request = PublishRequest
+                .builder()
+                .data(dialogMessagePublishRequest)
+                .eventType("new-message")
+                .userId(sender.getId())
+                .build();
+
+        this.publisherService.publishMessageRequest(receiver.getId(), request);
 
 
         return savedMessage;

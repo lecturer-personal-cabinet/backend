@@ -1,7 +1,7 @@
 package by.psu.services.dialogs.implementations;
 
+import by.psu.services.dialogs.PublishRequest;
 import by.psu.services.dialogs.interfaces.PublisherService;
-import by.psu.services.dialogs.model.DialogMessagePublishRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public DialogMessagePublishRequest publishMessageRequest(String userId, DialogMessagePublishRequest request) {
+    public PublishRequest publishMessageRequest(String userId, PublishRequest request) {
         System.out.println("Send request: " + request);
         try {
             String value = objectMapper.writeValueAsString(request);

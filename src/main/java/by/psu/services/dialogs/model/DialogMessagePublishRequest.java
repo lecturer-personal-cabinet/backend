@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DialogMessagePublishRequest {
+public class DialogMessagePublishRequest extends PublisherServiceRequest {
     private String receiverId;
     private String senderId;
     private String messageId;
