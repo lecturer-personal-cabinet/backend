@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class PublishRequest {
-    private String userId;
     private PublisherServiceRequest data;
     private String eventType;
 }

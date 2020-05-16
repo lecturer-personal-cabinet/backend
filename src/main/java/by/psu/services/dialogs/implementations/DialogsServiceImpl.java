@@ -115,7 +115,6 @@ public class DialogsServiceImpl implements DialogsService {
                 .builder()
                 .data(dialogMessagePublishRequest)
                 .eventType("new-message")
-                .userId(sender.getId())
                 .build();
 
         this.publisherService.publishMessageRequest(receiver.getId(), request);
