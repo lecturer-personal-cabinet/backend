@@ -76,6 +76,13 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public User updateUser(User user) {
+        User existing = this.getUserById(user.getId()).orElseThrow();
+        user.setPassword(existing.getPassword());
+        return this.saveUser(user);
+    }
+
+    @Override
     public Optional<User> getByEmail(String email) {
         return usersRepository
                 .findByEmail(email)

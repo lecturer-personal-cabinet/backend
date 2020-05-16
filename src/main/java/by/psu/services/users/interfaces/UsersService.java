@@ -18,6 +18,7 @@ public interface UsersService {
     Optional<User> getUserById(String id);
     Optional<User> getByEmail(String email);
     User saveUser(User user);
+    User updateUser(User user);
 
     List<Group> getAllGroups();
     Optional<Group> getGroupRelatedToUser(String userId);

@@ -91,7 +91,7 @@ public class UsersController {
     @PutMapping(path = "/users/{userId}")
     public User updateUser(@RequestBody User user, @PathVariable("userId") String userId) {
         user.setId(userId);
-        return usersService.saveUser(user);
+        return usersService.updateUser(user);
     }
 
     @GetMapping(path = "/users/{userId}/dialogs")
