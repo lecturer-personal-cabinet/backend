@@ -27,20 +27,17 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
     private final GroupsRepository groupsRepository;
     private final UserProfileRepository userProfileRepository;
-    private final DialogsService dialogsService;
     private final PortfolioService portfolioService;
 
     public UsersServiceImpl(UserMapper userMapper,
                             UsersRepository usersRepository,
                             GroupsRepository groupsRepository,
                             UserProfileRepository userProfileRepository,
-                            DialogsService dialogsService,
                             PortfolioService portfolioService) {
         this.userMapper = userMapper;
         this.usersRepository = usersRepository;
         this.groupsRepository = groupsRepository;
         this.userProfileRepository = userProfileRepository;
-        this.dialogsService = dialogsService;
         this.portfolioService = portfolioService;
     }
 
@@ -126,11 +123,6 @@ public class UsersServiceImpl implements UsersService {
         maybeExistingProfile.ifPresent(entity -> entityToSave.setId(entity.getId()));
         UserProfileEntity savedEntity = userProfileRepository.save(entityToSave);
         return userMapper.toDto(savedEntity);
-    }
-
-    @Override
-    public List<Dialog> getUserDialogs(String userId) {
-        return dialogsService.getAllDialogsByUserId(userId);
     }
 
     @Override

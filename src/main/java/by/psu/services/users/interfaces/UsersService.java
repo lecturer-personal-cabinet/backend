@@ -26,6 +26,5 @@ public interface UsersService {
     Optional<UserProfile> getUserProfile(String userId);
     UserProfile saveUserProfile(String userId, UserProfile userProfile);
 
-    List<Dialog> getUserDialogs(String userId);
     List<PortfolioCard> getUserPortfolioCards(String userId);
 }

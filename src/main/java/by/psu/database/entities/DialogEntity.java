@@ -19,9 +19,9 @@ public class DialogEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy="dialog")
-    private Set<DialogMessageEntity> messages;
+    @Column(name = "participants_hash")
+    private String participantsHash;
 
     @OneToMany(mappedBy="dialog")
-    private Set<DialogParticipantEntity> participants;
+    private Set<DialogMessageEntity> messages;
 }

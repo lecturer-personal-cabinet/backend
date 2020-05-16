@@ -2,6 +2,7 @@ package by.psu.controllers;
 
 import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.model.DialogMessage;
+import by.psu.services.dialogs.model.SendMessageRequest;
 import by.psu.services.dialogs.model.UpdateMessageReadStatusRequest;
 import by.psu.services.dialogs.model.UpdateMessageReadStatusResponse;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class DialogsController {
         return UpdateMessageReadStatusResponse.builder()
                 .updatedMessagesNumber(updatedNumber)
                 .build();
+    }
+
+    @PostMapping(path = "/messages/send")
+    public DialogMessage sendMessage(@RequestBody SendMessageRequest request) {
+        return dialogsService.sendDialogMessage(request);
     }
 }

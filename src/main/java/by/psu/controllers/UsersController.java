@@ -1,5 +1,6 @@
 package by.psu.controllers;
 
+import by.psu.services.dialogs.interfaces.DialogsService;
 import by.psu.services.dialogs.model.Dialog;
 import by.psu.services.portfolio.model.PortfolioCard;
 import by.psu.services.users.interfaces.UsersService;
@@ -19,9 +20,12 @@ import java.util.stream.Stream;
 @CrossOrigin
 public class UsersController {
     private final UsersService usersService;
+    private final DialogsService dialogsService;
 
-    public UsersController(UsersService usersService) {
+    public UsersController(UsersService usersService,
+                           DialogsService dialogsService) {
         this.usersService = usersService;
+        this.dialogsService = dialogsService;
     }
 
     @GetMapping(path = "/users")
@@ -92,7 +96,7 @@ public class UsersController {
 
     @GetMapping(path = "/users/{userId}/dialogs")
     public List<Dialog> getUserDialogs(@PathVariable("userId") String userId) {
-        return usersService.getUserDialogs(userId);
+        return dialogsService.getAllDialogsByUserId(userId);
     }
 
     @GetMapping(path = "/users/{userId}/portfolio/card")
