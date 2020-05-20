@@ -82,7 +82,7 @@ public class DialogsServiceImpl implements DialogsService {
         if (maybeDialog.isEmpty()) {
             DialogParticipant senderParticipant = DialogParticipant.builder().user(sender).build();
             DialogParticipant receiverParticipant = DialogParticipant.builder().user(receiver).build();
-            String dialogName = String.format("%s %s, %s %s", sender.getFirstName(), sender.getLastName(), receiver.getFirstName(), receiver.getLastName())
+            String dialogName = String.format("%s %s, %s %s", sender.getFirstName(), sender.getLastName(), receiver.getFirstName(), receiver.getLastName());
             Dialog dialog = Dialog.builder()
                     .name(dialogName)
                     .participants(List.of(senderParticipant, receiverParticipant))
