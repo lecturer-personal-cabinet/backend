@@ -9,6 +9,8 @@ import by.psu.services.portfolio.model.PortfolioCard;
 import by.psu.services.portfolio.model.PortfolioItem;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +54,7 @@ public class PortfolioServiceImpl implements PortfolioService {
                 .collect(Collectors.toList());
 
         System.out.println("ORDER: " + items.get(0).getOrder());
+        System.out.println(toSave.parallelStream().map(PortfolioItemEntity::getId).collect(Collectors.toList()));
         return portfolioItemRepository.saveAll(toSave)
                 .parallelStream()
                 .map(portfolioMapper::toDto)
@@ -63,6 +66,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         return portfolioItemRepository.getAllByPortfolioCardId(portfolioId)
                 .parallelStream()
                 .map(portfolioMapper::toDto)
+                .sorted((a, b) -> a.getOrder().compareTo(b.getOrder()))
                 .collect(Collectors.toList());
     }
 }
