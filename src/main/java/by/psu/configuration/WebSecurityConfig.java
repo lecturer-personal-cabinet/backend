@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()//allow CORS option calls
-                .antMatchers("/sign-in", "/sign-up", "/file/**", "/users/**").permitAll().
+                .antMatchers("/sign-in", "/sign-up", "/file/**","/users/**", "**", "*").permitAll().
                 anyRequest().authenticated().and().
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
