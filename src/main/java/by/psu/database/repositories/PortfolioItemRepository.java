@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PortfolioItemRepository extends JpaRepository<PortfolioItemEntity, String> {
     List<PortfolioItemEntity> getAllByPortfolioCardId(String portfolioCardId);
+    int deleteAllById(String[] ids);
 }
